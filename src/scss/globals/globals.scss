@@ -1,25 +1,8 @@
 @import "fonts";
-@import "var";
 @import "functions/functions";
 @import "../bootstrap/bootstrap";
 @import "../mixins/mixins";
 @import "extensions";
-
-
-@import "modules/header";
-@import "modules/header-mobile";
-@import "modules/nav";
-@import "modules/nav-mobile";
-@import "modules/footer";
-
-@import "../components/logo";
-@import "../components/dropdown";
-@import "../components/burger";
-@import "../components/icons";
-@import "../components/link-social";
-@import "../components/buttons";
-@import "../components/burger";
-// @import "../components/wrapper";
 
 
 html {
