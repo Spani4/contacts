@@ -1,10 +1,5 @@
 <template lang="pug">
-    .container
-        .row
-            .col
-                h1 It works!
-        .row
-            router-view
+    router-view
 </template>
 
 <script>
@@ -15,5 +10,4 @@ export default {
 
 
 <style lang="scss">
-
 </style>

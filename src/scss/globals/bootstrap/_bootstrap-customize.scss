@@ -9,21 +9,14 @@ $xl: 1200px;
 $xxl: 1400px;
 
 // COLORS
-// $light: #f6f6f6;
-$black: #000;
-$white: #fff;
-// $primary: $blue;
+
 
 $colors: (
-    "dark": $black,
-    // "light": $light,
+
 );
         
 $theme-colors: (  
-    // "primary": $primary,
-    "dark": $black,
-    "white": $white,
-    // "light": $light,
+
 );
 
 
@@ -38,6 +31,14 @@ $link-hover-color: inherit;
 $link-hover-decoration: none;
 // Darken percentage for links with `.text-*` class (e.g. `.text-success`)
 $emphasized-link-hover-darken-percentage: 7% !default;
+
+
+// Buttons + Forms
+//
+// Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
+$input-btn-focus-width:       .1rem;
+// $input-btn-focus-color:       rgba($component-active-bg, .25) !default;
+// $input-btn-focus-box-shadow:  0 0 0 $input-btn-focus-width $input-btn-focus-color !default;
 
 
 // GUTTER
