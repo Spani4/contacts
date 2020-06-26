@@ -1,19 +1,20 @@
 <template lang="pug">
     .sign-up
         form
-            form-group        
+            .form-group        
                 label.d-block E-mail
                     input.form-control(
                         type="email"
+                        v-focus
                         v-model="email"
                     )
-            form-group                    
+            .form-group                    
                 label.d-block Password
                     input.form-control(
                         type="password"
                         v-model="password"
                     )
-            form-group                    
+            .form-group                    
                 label.d-block Confirm password
                     input.form-control(
                         type="password"

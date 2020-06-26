@@ -23,6 +23,8 @@
 
 
 <script>
+import { mapActions } from 'vuex';
+
 import SignIn from "~/vue/components/AuthPage/SignIn.vue";
 import SignUp from "~/vue/components/AuthPage/SignUp.vue";
 
@@ -38,6 +40,14 @@ export default {
         return {
             action: 'sign-in',
         }
+    },
+
+    methods: {
+        ...mapActions(['startLoading', 'stopLoading'])
+    },
+
+    mounted() {
+        this.stopLoading();
     }
 }
 </script>

@@ -5,7 +5,8 @@
                 label.d-block E-mail
                     input.form-control(
                         type="email"
-                        v-model="email"
+                        v-focus
+                        v-model.trim="$v.email.$model"
                     )
             .form-group
                 label.d-block Password
@@ -22,6 +23,8 @@
 
 
 <script>
+import validations from '~/js/utils/validations';
+
 export default {
     name: "SignIn",
 
@@ -37,6 +40,11 @@ export default {
 
         }
     },
+
+    validations: {
+        email: validations.email,
+        password: validations.password,
+    }
 }
 </script>
 
