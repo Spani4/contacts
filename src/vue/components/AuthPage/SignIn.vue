@@ -8,16 +8,35 @@
                         v-focus
                         v-model.trim="$v.email.$model"
                     )
+                .text-danger(v-if="showErrors")
+                    small.d-block(
+                        v-if="!$v.email.email"
+                    ) Email is invalid
+                    small.d-block(
+                        v-if="!$v.email.required"
+                    ) Email is required
+                    small.d-block(
+                        v-if="!$v.email.max"
+                    ) Email is too long. You gotta be kidding.
+
             .form-group
                 label.d-block Password
                     input.form-control(
                         type="password"
-                        v-model="password"
+                        v-model="$v.password.$model"
                     )
+                .text-danger(v-if="showErrors")
+                    small.d-block(
+                        v-if="!$v.password.max"
+                    ) Password is too long. You gotta be kidding.
+                    small.d-block(
+                        v-if="!$v.password.required"
+                    ) Password is required
+
             .text-right
                 button.btn.btn-primary(
                     type="button"
-                    @click=""
+                    @click="submit"
                 ) Sign In
 </template>
 
@@ -31,13 +50,14 @@ export default {
     data() {
         return {
             email: '',
-            password: ''
+            password: '',
+            showErrors: false,
         }
     },
 
     methods: {
         submit() {
-
+            console.log('sign in submit')
         }
     },
 

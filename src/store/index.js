@@ -12,6 +12,7 @@ export default new Vuex.Store({
     },
 
     state: {
+        apiKey: 'AIzaSyAQyFm0xDYZrPL45nyffNi3jCqwtOBRqLc',
         loading: true,
     },
 
