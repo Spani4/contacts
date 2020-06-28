@@ -1,10 +1,18 @@
 @import "globals/globals";
 
 @import "components/loader";
+@import "components/header";
+@import "components/contact-editor";
 
+body {
+    background-color: $light;
+}
 
 .auth-page {
     padding-top: 20vh;
     min-height: 100vh;
-    background-color: $light;
+}
+
+.contacts-page {
+    min-height: 100vh;
 }

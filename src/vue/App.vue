@@ -6,7 +6,7 @@
 
 
 <script>
-import Loader from '~/vue/components/Loader.vue';
+import Loader from '~/vue/components/common/Loader.vue';
 
 export default {
 

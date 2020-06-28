@@ -1,7 +1,6 @@
 <template lang="pug">
     .loader(v-if="loading")
         .spinner-border.text-primary
-
 </template>
 
 <script>

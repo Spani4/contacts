@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import auth from './auth';
+import contacts from './contacts';
 
 Vue.use(Vuex);
 
@@ -9,11 +10,12 @@ export default new Vuex.Store({
 
     modules: {
         auth,
+        contacts
     },
 
     state: {
-        apiKey: 'AIzaSyAQyFm0xDYZrPL45nyffNi3jCqwtOBRqLc',
-        loading: true,
+        loading: false,
+        user: null
     },
 
     actions: {
@@ -28,6 +30,10 @@ export default new Vuex.Store({
     mutations: {
         SET_LOADING(state, loading) {
             state.loading = loading;
+        },
+
+        SET_USER(state, user) {
+            state.user = user;
         }
     }
 })

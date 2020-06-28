@@ -1,5 +1,5 @@
 <template lang="pug">
-    .auth-page
+    .auth-page.bg-light
         .container
             .row
                 .col.col-md-8.col-lg-6.mx-auto 

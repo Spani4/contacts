@@ -17,8 +17,7 @@
             ) Sign Up
 
     .auth-frame__content.border-top-0.bg-white.border.p-3
-        keep-alive
-            component(:is="action")
+        component(:is="action")
 </template>
 
 
@@ -42,12 +41,8 @@ export default {
         }
     },
 
-    methods: {
-        ...mapActions(['startLoading', 'stopLoading'])
-    },
-
-    mounted() {
-        this.stopLoading();
-    }
+    // methods: {
+    //     ...mapActions(['startLoading', 'stopLoading'])
+    // },
 }
 </script>

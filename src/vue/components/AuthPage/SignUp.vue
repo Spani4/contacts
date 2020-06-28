@@ -32,6 +32,9 @@
                     small.d-block(
                         v-if="!$v.password.required"
                     ) Password is required
+                    small.d-block(
+                        v-if="!$v.password.min"
+                    ) Password requires at least 6 symbols
 
             .form-group                    
                 label.d-block Confirm password
@@ -73,17 +76,18 @@ export default {
         ...mapActions('auth', ['signUp']),
 
         submit() {
-            console.log(this.$v.$invalid)
-            console.log(this.$v.passwordConfirm)
-            this.$v.email.$touch();
-            this.showErrors = true;
 
             if ( this.$v.$invalid ) {
                 this.showErrors = true;
-            } else {
-                console.log('submit')
-                this.signUp();
+                return
             }
+
+            const data = {
+                email: this.email,
+                password: this.password
+            }
+
+            this.signUp(data);
         }
     },
 

@@ -42,6 +42,8 @@
 
 
 <script>
+import { mapActions } from 'vuex';
+
 import validations from '~/js/utils/validations';
 
 export default {
@@ -56,8 +58,21 @@ export default {
     },
 
     methods: {
+        ...mapActions('auth', ['signIn']),
+
         submit() {
-            console.log('sign in submit')
+
+            if ( this.$v.$invalid ) {
+                this.showErrors = true;
+                return
+            }
+
+            const data = {
+                email: this.email,
+                password: this.password
+            }
+
+            this.signIn(data);
         }
     },
 
@@ -67,7 +82,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss">
-
-</style>

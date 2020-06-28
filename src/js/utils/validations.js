@@ -12,6 +12,7 @@ export default {
     password: {
         required,
         max: maxLength(100),
+        min: minLength(6),
     },
 
     passwordConfirm: {
