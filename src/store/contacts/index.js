@@ -1,4 +1,4 @@
-import * as axios from '~/js/utils/axios';
+import * as axios from '~/js/utils/axios/index';
 
 
 export default {

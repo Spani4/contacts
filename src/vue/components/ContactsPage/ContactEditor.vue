@@ -123,8 +123,9 @@ export default {
         async cancelEditing() {
             // 'https://contacts-65dbf.firebaseio.com'
             // console.log(this.user)
-            const jwt = JSON.parse(localStorage.getItem('jwt'));
-            const response = await axios.post(`https://contacts-65dbf.firebaseio.com/${this.user.id}.json?auth=${jwt.token}`, this.contact);
+            this.addContact(this.contact);
+            // const jwt = JSON.parse(localStorage.getItem('jwt'));
+            // const response = await axios.post(`https://contacts-65dbf.firebaseio.com/${this.user.id}.json?auth=${jwt.token}`, this.contact);
             // console.log(response);
         },
     },
