@@ -8,13 +8,18 @@
                     span {{ email }}
                     a.header__logout-link.text-secondary(
                         href="/auth"
-                        @click.prevent=""
+                        @click.prevent="logout"
                     ) Exit
 </template>
 
 
 <script>
 export default {
+    methods: {
+        logout() {
+            this.$store.dispatch('auth/logout');
+        }
+    },
     computed: {
         email() {
             return this.$store.state.user.email;

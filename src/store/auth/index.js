@@ -21,8 +21,8 @@ export default {
                     email: response.data.email,
                 }
 
-                // await dispatch('postUser', user);
-
+                await dispatch('postUser', { ...user, contacts: [] });
+                
                 router.replace('/');
             } catch(err) {
                 console.dir(err);
@@ -35,6 +35,7 @@ export default {
 
             try {
                 await axios.auth.post('/accounts:signInWithPassword', data);
+                await dispatch('contacts/fetchContacts', null, { root: true });
                 router.replace('/');
             } catch (err) {
                 console.log(err)
@@ -53,10 +54,21 @@ export default {
             }
         },
 
-        // async postUser(context, user) {
-        //     const initialData = { ...user, contacts: []}
-        //     axios.db.post(`/users.json/${user.id}`, initialData)
-        // }
+        logout({ commit }) {
+            commit('SET_USER', null, { root: true });
+            commit('contacts/SET_CONTACTS', [], { root: true });
+            localStorage.removeItem('jwt');
+            router.replace('/auth');
+        },
+
+        async postUser(context, initialUser) {
+
+            try {
+                await axios.db.post(`.json`, initialUser)
+            } catch(err) {
+                console.dir(err);
+            }
+        }
     },
 
     mutations: {},

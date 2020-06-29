@@ -10,22 +10,15 @@ const database = axios.create({
 
 database.interceptors.request.use(async config => {
 
-    console.log(config);
-
-    const userId = store.state.user.id;
     let jwt = JSON.parse(localStorage.getItem('jwt'));
-
-    console.log(jwt.expires);
-    console.log(Date.now());
-    console.log(jwt.expires < Date.now());
-    
+    const userId = store.state.user.id;
 
     if ( jwt.expires < Date.now() ) {
         const refresherResponse = await refresher.post();
         jwt = refresherResponse.data;
     }
 
-    config.baseURL += `/${userId}`;
+    config.baseURL += `/users/${userId}`;
     config.url = new URL(config.baseURL + config.url);
     config.url.searchParams.set('auth', jwt.token);
 

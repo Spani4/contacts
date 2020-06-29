@@ -33,15 +33,12 @@ refresher.interceptors.response.use(response => {
     const jwt = JSON.parse(localStorage.getItem('jwt'));
     
     jwt.token = response.data.access_token,
-    jwt.expires = Date.now() + (response.data.expires_in || 3600) * 1000,
+    jwt.expires = Date.now() + (response.data.expires_in) * 1000,
     jwt.refreshToken = response.data.refresh_token,
 
     localStorage.setItem('jwt', JSON.stringify(jwt));
     
     response.data = jwt;
-    
-    console.log('refresher response');
-    console.log(response);
 
     return response;
 });

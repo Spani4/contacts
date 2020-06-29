@@ -10,7 +10,6 @@ const auth = axios.create({
 
 auth.interceptors.request.use(config => {
 
-    console.log(config);
     config.data = { ...config.data, returnSecureToken: true};
     config.url = new URL(config.baseURL + config.url);
     config.url.searchParams.set('key', conf.API_KEY);
@@ -31,7 +30,7 @@ auth.interceptors.response.use(response => {
     
     const jwt = {
         token: response.data.idToken,
-        expires: Date.now() + (response.data.expiresIn || 3600) * 1000,
+        expires: Date.now() + response.data.expiresIn * 1000,
         refreshToken: response.data.refreshToken,
         user,
     }
@@ -40,8 +39,6 @@ auth.interceptors.response.use(response => {
 
     store.commit('SET_USER', user);
     
-    console.log(response);
-
     return response;
 });
 

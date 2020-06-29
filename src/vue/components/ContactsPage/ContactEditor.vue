@@ -116,7 +116,6 @@ export default {
 
         saveContact() {
             this.addContact(this.contact);
-            // this.$store.dispatch('contacts/addContact', this.contact);
         },
         removeContact() {},
 
