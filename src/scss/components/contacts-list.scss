@@ -1,0 +1,28 @@
+.contacts-list {
+
+    height: 80vh;
+    max-height: 80vh;
+    border: 1px groove $secondary-light;
+
+    &__item {
+        padding: 1rem;
+        font-size: 1.25rem;
+        line-height: 2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: box-shadow .1s;
+        cursor: pointer;
+        
+        &:not(:first-child){
+            border-top: 1px groove $secondary-light;
+        }
+        &:last-child {
+            border-bottom: 1px groove $secondary-light;
+        }
+
+        &:hover {
+            box-shadow: inset 0 0 10px 2px $secondary-dark;
+        }
+    }
+}

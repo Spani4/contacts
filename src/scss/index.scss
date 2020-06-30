@@ -3,6 +3,7 @@
 @import "components/loader";
 @import "components/header";
 @import "components/contact-editor";
+@import "components/contacts-list";
 
 body {
     background-color: $light;
@@ -14,5 +15,12 @@ body {
 }
 
 .contacts-page {
-    min-height: 100vh;
+    min-height: 90vh;
+    @include flex(col);
+    
+    &__content {
+        @extend .py-3;
+        flex-grow: 1;
+        overflow-y: auto;
+    }
 }

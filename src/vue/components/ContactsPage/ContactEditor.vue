@@ -56,6 +56,10 @@
             
             .row.form-group
                 .col-12.col-xl-8.btn-group
+                    button.btn.btn-light(
+                        type="button"
+                        @click="$emit('close')"
+                    ) Cancel
                     button.btn.btn-success(
                         type="button"
                         :disabled="!contact.name.length"
@@ -66,10 +70,6 @@
                         v-if="contactToEdit"
                         @click="removeContact"
                     ) Remove contact
-                    button.btn.btn-light(
-                        type="button"
-                        @click="cancelEditing"
-                    ) Cancel
             
             
 </template>
@@ -114,19 +114,12 @@ export default {
             })
         },
 
-        saveContact() {
-            this.addContact(this.contact);
+        async saveContact() {
+            await this.addContact(this.contact);
+            this.$emit('close');
         },
-        removeContact() {},
 
-        async cancelEditing() {
-            // 'https://contacts-65dbf.firebaseio.com'
-            // console.log(this.user)
-            this.addContact(this.contact);
-            // const jwt = JSON.parse(localStorage.getItem('jwt'));
-            // const response = await axios.post(`https://contacts-65dbf.firebaseio.com/${this.user.id}.json?auth=${jwt.token}`, this.contact);
-            // console.log(response);
-        },
+        removeContact() {},
     },
 
     mounted() {

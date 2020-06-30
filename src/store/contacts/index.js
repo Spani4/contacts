@@ -15,19 +15,26 @@ export default {
 
             try {
                 const response = await axios.db.get(`/contacts.json`);
-                console.log(response);
-
-                if (response.data) 
-                    commit('SET_CONTACTS', response.data);
+                
+                if ( !response.data ) return;
+                
+                for ( let key in response.data ) {
+                    response.data[key].id = key;
+                }
+                
+                const contacts = Object.values(response.data);
+                commit('SET_CONTACTS', contacts);
             } catch (err) {
                 console.dir(err);
             }
         },
 
-        async addContact({ rootState, dispatch }, contact) {
+        async addContact({ commit, dispatch }, contact) {
 
             try {
                 const response = await axios.db.post(`/contacts.json`, contact);
+                contact.id = response.data.name;
+                commit('PUSH_CONTACT', contact);
             } catch(err) {
                 console.dir(err);
             } finally {
@@ -40,21 +47,12 @@ export default {
 
         SET_CONTACTS(state, contacts) {
             state.contacts = contacts;
+        },
+
+        PUSH_CONTACT(state, contact) {
+            state.contacts.push(contact);
         }
     },
 
     getters: {}
 }
-
-
-// {
-//     /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
-//     "rules": {
-//         "contacts": {
-//             "$uid": {
-//                 ".read": "$uid === auth.uid",
-//                     ".write": "$uid === auth.uid"
-//             }
-//         }
-//     }
-// }

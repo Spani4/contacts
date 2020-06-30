@@ -15,14 +15,12 @@ export default {
 
             try {
                 const response = await axios.auth.post('/accounts:signUp', data);
-
                 const user = {
                     id: response.data.localId,
                     email: response.data.email,
                 }
 
-                await dispatch('postUser', { ...user, contacts: [] });
-                
+                await dispatch('storeUserInDatabase', { ...user, contacts: [] });
                 router.replace('/');
             } catch(err) {
                 console.dir(err);
@@ -44,13 +42,17 @@ export default {
             }
         },
 
-        autoLogin({ commit }) {
+        async autoLogin({ dispatch, commit }) {
             
             try {
                 const user = JSON.parse(localStorage.getItem('jwt')).user;
                 commit('SET_USER', user, { root: true });
+                await dispatch('contacts/fetchContacts', null, { root: true });
             } catch(err) {
+                console.dir(err)
                 router.replace('/auth');
+            } finally {
+                dispatch('stopLoading', null, { root: true })
             }
         },
 
@@ -61,10 +63,10 @@ export default {
             router.replace('/auth');
         },
 
-        async postUser(context, initialUser) {
+        async storeUserInDatabase(context, initialUser) {
 
             try {
-                await axios.db.post(`.json`, initialUser)
+                await axios.db.put(`.json`, initialUser)
             } catch(err) {
                 console.dir(err);
             }
