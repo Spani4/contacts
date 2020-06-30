@@ -1,13 +1,19 @@
 .contacts-list {
 
-    height: 80vh;
-    max-height: 80vh;
-    border: 1px groove $secondary-light;
+    max-height: 60vh;
+    border: 2px ridge $secondary-light;
+    overflow: auto;
+    border-radius: .5rem;
+    
+    @media (min-width: $md) {
+        height: 80vh;
+        max-height: 80vh;
+    }
 
     &__item {
-        padding: 1rem;
+        padding: 0 1rem;
         font-size: 1.25rem;
-        line-height: 2rem;
+        line-height: 2.5rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -15,11 +21,16 @@
         cursor: pointer;
         
         &:not(:first-child){
-            border-top: 1px groove $secondary-light;
+            border-top: 2px ridge $secondary-light;
         }
         &:last-child {
-            border-bottom: 1px groove $secondary-light;
+            border-bottom: none;
+
+            @media (min-width: $md) {
+                border-bottom: 2px ridge $secondary-light;
+            }
         }
+
 
         &:hover {
             box-shadow: inset 0 0 10px 2px $secondary-dark;

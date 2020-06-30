@@ -1,5 +1,5 @@
 <template lang="pug">
-    header.bg-primary-dark.text-white.py-3
+    header.header
         .container
             .row
                 .col-12.col-sm-3.header__left

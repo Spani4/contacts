@@ -9,8 +9,6 @@ const refresher = axios.create({
 
 refresher.interceptors.request.use(config => {
 
-    console.log(config);
-    
     const jwt = JSON.parse(localStorage.getItem('jwt'));
     const refreshToken = jwt.refreshToken;
 
@@ -23,7 +21,6 @@ refresher.interceptors.request.use(config => {
     };
     
     config.data = data;
-    console.log(config);
 
     return config;
 })

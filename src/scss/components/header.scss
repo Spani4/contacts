@@ -1,6 +1,10 @@
 .header {
 
     @extend %centered;
+    margin-bottom: 1rem;
+    padding:  1rem 0;
+    background-color: $primary-dark;
+    color: $white;
 
     &__title {
         letter-spacing: 1.5vw;

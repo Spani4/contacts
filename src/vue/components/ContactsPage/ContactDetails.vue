@@ -1,5 +1,7 @@
 <template lang="pug">
-    .contact-details.py-3
+    .contact-details(
+        :key="contact.id"
+    )
 
         h1.mb-3 {{ contact.name }}
 
@@ -20,26 +22,29 @@
             h3 Details
             div {{ contact.details }}
 
-        .container.pt-2
-            .row.btn-group.w-100
-                button.col-4.btn.btn-primary(
-                    type="button"
-                    @click="$emit('edit')"
-                ) Edit
-                button.col-4.btn.btn-light(
-                    type="button"
-                    @click="$emit('unselect')"
-                ) Hide
-                button.col-4.btn.btn-danger(
-                    type="button"
-                    @click=""
-                ) Remove
+        .flex-grow-1
 
+        .container.pt-2
+            .row.w-100.mx-auto
+                button-group.col(
+                    :editBtn="true"
+                    :contact="contact"
+                    @edit="$emit('edit')"
+                    @hide="$emit('hide')"
+                )
+              
 
 </template>
 
 <script>
+import ButtonGroup from './ButtonGroup.vue';
+
 export default {
+
+    components: {
+        ButtonGroup,
+    },
+
     props: {
         contact: Object,
     },

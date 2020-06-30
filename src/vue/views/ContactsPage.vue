@@ -6,22 +6,27 @@
             v-if="!editorEnabled"
         )
             .row
-                .col-12.col-md-6.col-lg-7.order-md-1
+                .col-12.col-md-6.col-lg-5.mb-3.mb-md-0
+                    .text-center.mb-3
+                        button.btn.btn-primary.w-100(
+                            type="button"
+                            @click="createContact"
+                        ) Add new
+                    contacts-list(
+                        v-model="selectedContact"
+                    )
+                .col-12.col-md-6.col-lg-7.mh-100.overflow-auto
                     contact-details(
                         v-if="selectedContact"
                         :contact="selectedContact"
                         @edit="editContact"
-                        @unselect="selectedContact = null"
+                        @hide="selectedContact = null"
                     )            
-                .col-12.col-md-6.col-lg-5
-                    contacts-list(
-                        v-model="selectedContact"
-                    )
 
         contact-editor(
             v-else
             :contactToEdit="selectedContact"
-            @close="closeEditor"
+            @hide="closeEditor"
         )
 
 </template>

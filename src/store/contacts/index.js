@@ -40,6 +40,33 @@ export default {
             } finally {
                 dispatch('stopLoading', null, { root: true });
             }
+        },
+
+        async updateContact({ commit, dispatch }, contact) {
+
+            try {
+                const contactId = contact.id;
+                contact.id = undefined;
+
+                await axios.db.put(`/contacts/${contactId}.json`, contact);
+                commit('UPDATE_CONTACT', { contact, id: contactId});
+            } catch (err) {
+                console.dir(err);
+            } finally {
+                dispatch('stopLoading', null, { root: true });
+            }
+        },
+
+        async removeContact({commit, dispatch}, contact) {
+
+            try {
+                const response = await axios.db.delete(`/contacts/${contact.id}.json`, contact);
+                commit('REMOVE_CONTACT', contact);
+            } catch (err) {
+                console.dir(err);
+            } finally {
+                dispatch('stopLoading', null, { root: true });
+            }
         }
     },
 
@@ -51,7 +78,32 @@ export default {
 
         PUSH_CONTACT(state, contact) {
             state.contacts.push(contact);
-        }
+        },
+        
+        REMOVE_CONTACT(state, contact) {
+            state.contacts = state.contacts.filter( item => item.id !== contact.id );
+        },
+
+        UPDATE_CONTACT(state, data) {
+
+            const indexToUpdate = state.contacts.indexOf(data.contact);
+            state.contacts.splice(indexToUpdate, 1)
+            state.contacts.push(data.contact);
+            console.log('updated')
+
+            // const indexToUpdate = state.contacts.indexOf(data.contact);
+            // state.contacts[indexToUpdate] = {...data.contact};
+            // state.contacts[indexToUpdate].id = data.id;
+            // state.contacts.push(contact);
+
+
+            // let contactToUpdate = state.contacts.find(item => item.id === data.id );
+            // contactToUpdate = { ...data.contact };
+            // contactToUpdate.id = data.id;
+            // contactToUpdate = { ...contact };
+            // state.contacts.reverse().reverse();
+        },
+        
     },
 
     getters: {}

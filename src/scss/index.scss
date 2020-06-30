@@ -4,6 +4,7 @@
 @import "components/header";
 @import "components/contact-editor";
 @import "components/contacts-list";
+@import "components/contact-details";
 
 body {
     background-color: $light;
@@ -15,7 +16,7 @@ body {
 }
 
 .contacts-page {
-    min-height: 90vh;
+    min-height: 100vh;
     @include flex(col);
     
     &__content {

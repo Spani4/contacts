@@ -55,30 +55,25 @@
                     )
             
             .row.form-group
-                .col-12.col-xl-8.btn-group
-                    button.btn.btn-light(
-                        type="button"
-                        @click="$emit('close')"
-                    ) Cancel
-                    button.btn.btn-success(
-                        type="button"
-                        :disabled="!contact.name.length"
-                        @click="saveContact"
-                    ) Save contact
-                    button.btn.btn-danger(
-                        type="button"
-                        v-if="contactToEdit"
-                        @click="removeContact"
-                    ) Remove contact
-            
+                button-group.col-12.col-xl-8(
+                    :saveBtn="true"
+                    :contact="contact"
+                    @hide="$emit('hide')"
+                )
             
 </template>
 
 <script>
+import ButtonGroup from './ButtonGroup.vue';
+
 import { mapActions, mapState } from 'vuex';
 import axios from 'axios';
 
 export default {
+
+    components: {
+        ButtonGroup,
+    },
 
     props: {
         contactToEdit: Object,
@@ -89,7 +84,7 @@ export default {
             contact: {
                 name: '',
                 address: '',
-                phones: [{ description: 'main', number: ''}],
+                phones: [{ description: 'main', number: undefined }],
                 details: ''
             }
         }
@@ -105,7 +100,6 @@ export default {
     },
 
     methods: {
-        ...mapActions('contacts', ['addContact']),
 
         addPhone() {
             this.contact.phones.push({
@@ -113,19 +107,12 @@ export default {
                 number: ''
             })
         },
-
-        async saveContact() {
-            await this.addContact(this.contact);
-            this.$emit('close');
-        },
-
-        removeContact() {},
     },
 
     mounted() {
 
         if ( this.contactToEdit ) {
-            this.contact = this.contactToEdit;
+            this.contact = { ...this.contactToEdit };
         }
     }
 }
