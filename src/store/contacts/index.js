@@ -45,11 +45,10 @@ export default {
         async updateContact({ commit, dispatch }, contact) {
 
             try {
-                const contactId = contact.id;
-                contact.id = undefined;
+                const updatedContact = { ...contact, id: undefined };
 
-                await axios.db.put(`/contacts/${contactId}.json`, contact);
-                commit('UPDATE_CONTACT', { contact, id: contactId});
+                await axios.db.put(`/contacts/${contact.id}.json`, updatedContact);
+                commit('UPDATE_CONTACT', contact);
             } catch (err) {
                 console.dir(err);
             } finally {
@@ -84,24 +83,13 @@ export default {
             state.contacts = state.contacts.filter( item => item.id !== contact.id );
         },
 
-        UPDATE_CONTACT(state, data) {
+        UPDATE_CONTACT(state, contact) {
 
-            const indexToUpdate = state.contacts.indexOf(data.contact);
-            state.contacts.splice(indexToUpdate, 1)
-            state.contacts.push(data.contact);
-            console.log('updated')
+            const contactToUpdate = state.contacts.find(item => item.id === contact.id );
 
-            // const indexToUpdate = state.contacts.indexOf(data.contact);
-            // state.contacts[indexToUpdate] = {...data.contact};
-            // state.contacts[indexToUpdate].id = data.id;
-            // state.contacts.push(contact);
-
-
-            // let contactToUpdate = state.contacts.find(item => item.id === data.id );
-            // contactToUpdate = { ...data.contact };
-            // contactToUpdate.id = data.id;
-            // contactToUpdate = { ...contact };
-            // state.contacts.reverse().reverse();
+            for ( let key in contact ) {
+                contactToUpdate[key] = contact[key];
+            }
         },
         
     },

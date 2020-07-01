@@ -26,23 +26,29 @@
 
         .container.pt-2
             .row.w-100.mx-auto
-                button-group.col(
-                    :editBtn="true"
-                    :contact="contact"
-                    @edit="$emit('edit')"
-                    @hide="$emit('hide')"
-                )
-              
+                .btn-group.col
+                    button.col-4.btn.btn-primary(
+                        type="button"
+                        @click="$emit('edit')"
+                    ) Edit
+                    button.btn.btn-light(
+                        type="button"
+                        @click="$emit('hide')"
+                    ) Hide
+                    remove-btn(
+                        :contact="contact"
+                        @removed="$emit('hide')"
+                    )
 
 </template>
 
 <script>
-import ButtonGroup from './ButtonGroup.vue';
+import RemoveBtn from './RemoveBtn.vue';
 
 export default {
 
     components: {
-        ButtonGroup,
+        RemoveBtn,
     },
 
     props: {

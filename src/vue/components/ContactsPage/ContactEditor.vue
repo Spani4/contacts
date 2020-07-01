@@ -30,16 +30,21 @@
                 .p-2.w-100.border-bottom(
                     v-for="(phone, index) in additionalPhones"
                 )
-                    label.col-12.col-sm-6.col-xl-4
+                    label.col-12.col-sm-5.col-xl-4
                         h5.mb-1 Description               
                         input.form-control(
                             v-model.trim="additionalPhones[index].description"
                         )
-                    label.col-12.col-sm-6.col-xl-4
+                    label.col-12.col-sm-5.col-xl-4
                         h5.mb-1 Phone number
                         input.form-control(
+                            v-focus
                             v-model.trim="additionalPhones[index].number"
                         )
+                    button.btn.btn-danger.btn-sm(
+                        type="button"
+                        @click="removePhone(index+1)"
+                    ) remove
 
                 .col-12.pt-3
                     button.btn.btn-primary(
@@ -55,24 +60,35 @@
                     )
             
             .row.form-group
-                button-group.col-12.col-xl-8(
-                    :saveBtn="true"
-                    :contact="contact"
-                    @hide="$emit('hide')"
-                )
-            
+                .btn-group.col-12.col-xl-8
+                    save-btn(
+                        type="button"
+                        :contact="contact"
+                        @saved="$emit('hide')"
+                    ) Save
+                    button.btn.btn-light(
+                        type="button"
+                        @click="$emit('hide')"
+                    ) Cancel
+                    remove-btn(
+                        v-if="contactToEdit"
+                        :contact="contactToEdit"
+                        @removed="$emit('hide')"
+                    )
+
 </template>
 
 <script>
-import ButtonGroup from './ButtonGroup.vue';
+import SaveBtn from './SaveBtn.vue';
+import RemoveBtn from './RemoveBtn.vue';
 
-import { mapActions, mapState } from 'vuex';
-import axios from 'axios';
+import { mapState } from 'vuex';
 
 export default {
 
     components: {
-        ButtonGroup,
+        SaveBtn,
+        RemoveBtn
     },
 
     props: {
@@ -84,7 +100,7 @@ export default {
             contact: {
                 name: '',
                 address: '',
-                phones: [{ description: 'main', number: undefined }],
+                phones: [{ description: 'Main', number: undefined }],
                 details: ''
             }
         }
@@ -94,7 +110,6 @@ export default {
         ...mapState(['user']),
 
         additionalPhones() {
-
             return this.contact.phones.filter( (phone, index) => index !== 0 );
         }
     },
@@ -105,7 +120,11 @@ export default {
             this.contact.phones.push({
                 description: 'Mobile',
                 number: ''
-            })
+            });
+        },     
+
+        removePhone(index) {
+            this.contact.phones = this.contact.phones.filter((phone, i) => index != i);
         },
     },
 
