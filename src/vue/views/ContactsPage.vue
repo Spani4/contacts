@@ -1,7 +1,7 @@
 <template lang="pug">
     .contacts-page.bg-secondary
         app-header
-
+        
         .contacts-page__content.container(
             v-if="!editorEnabled"
         )
@@ -17,18 +17,19 @@
                         :selectedContact="selectedContact"
                     )
                 .col-12.col-md-6.col-lg-7.mh-100.overflow-auto
-                    contact-details(
-                        v-if="selectedContactExists"
-                        :contact="selectedContact"
-                        @edit="editContact"
-                        @hide="selectedContact = null"
-                    )            
-
+                    transition(name="fade-left-slide" mode="out-in")
+                        contact-details(
+                            v-if="selectedContactExists"
+                            :contact="selectedContact"
+                            @edit="editContact"
+                            @hide="selectedContact = null"
+                        )
         contact-editor(
             v-else
             :contactToEdit="selectedContact"
             @hide="closeEditor"
         )
+
 
 </template>
 

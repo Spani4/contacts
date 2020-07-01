@@ -32,6 +32,11 @@
                     small.d-block(
                         v-if="!$v.password.required"
                     ) Password is required
+                    small.d-block(
+                        v-if="!$v.password.min"
+                    ) It's too short (That's what she said)
+
+            slot(name="autherror")
 
             .text-right
                 button.btn.btn-primary(
@@ -72,13 +77,19 @@ export default {
                 password: this.password
             }
 
-            this.signIn(data);
+            this.signIn(data).catch(err => {
+                this.$emit('authError', err)
+            });;
         }
     },
 
     validations: {
         email: validations.email,
         password: validations.password,
+    },
+
+    mounted() {
+        this.$emit('mounted');
     }
 }
 </script>

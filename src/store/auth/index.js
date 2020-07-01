@@ -22,8 +22,9 @@ export default {
 
                 await dispatch('storeUserInDatabase', { ...user, contacts: [] });
                 router.replace('/');
-            } catch(err) {
-                console.dir(err);
+            } catch(err) {   
+                if (err.response && err.response.data) throw err.response.data.error.message;
+                else console.dir(err);
             } finally {
                 dispatch('stopLoading', null, {root: true})
             }
@@ -36,7 +37,8 @@ export default {
                 await dispatch('contacts/fetchContacts', null, { root: true });
                 router.replace('/');
             } catch (err) {
-                console.log(err)
+                if (err.response && err.response.data) throw err.response.data.error.message;
+                else console.dir(err);
             } finally {
                 dispatch('stopLoading', null, { root: true })
             }
@@ -49,7 +51,7 @@ export default {
                 commit('SET_USER', user, { root: true });
                 await dispatch('contacts/fetchContacts', null, { root: true });
             } catch(err) {
-                console.dir(err)
+                console.warn('Autologin failed');
                 router.replace('/auth');
             } finally {
                 dispatch('stopLoading', null, { root: true })

@@ -45,7 +45,9 @@
                 .text-danger(v-if="showErrors")
                     small.d-block(
                         v-if="!$v.passwordConfirm.sameAsPassword"
-                    ) Passwords does not match.                 
+                    ) Passwords does not match.
+
+            slot(name="autherror")
 
             .text-right
                 button.btn.btn-primary(
@@ -75,7 +77,7 @@ export default {
     methods: {
         ...mapActions('auth', ['signUp']),
 
-        submit() {
+        async submit() {
 
             if ( this.$v.$invalid ) {
                 this.showErrors = true;
@@ -87,7 +89,9 @@ export default {
                 password: this.password
             }
 
-            this.signUp(data);
+            this.signUp(data).catch(err => {
+                this.$emit('authError', err)
+            });
         }
     },
 
@@ -95,6 +99,10 @@ export default {
         email: validations.email,
         password: validations.password,
         passwordConfirm: validations.passwordConfirm,
+    },
+
+    mounted() {
+        this.$emit('mounted');
     }
 }
 </script>

@@ -1,11 +1,18 @@
 <template lang="pug">
     .contact-editor
         form.container.py-3.bg-secondary.text-dark
+            .row
+                .col.pl-4.mb-3
+                    button.btn.btn-outline-primary(
+                        type="button"
+                        @click="$emit('hide')"
+                    ) &larr; Back
 
             .row.form-group
                 label.col-12.col-md-6.col-xl-4
                     h3.mb-1 Contact name
                     input.form-control(
+                        v-focus
                         v-model="contact.name"
                     )
                         
