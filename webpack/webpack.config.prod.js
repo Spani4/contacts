@@ -27,7 +27,7 @@ module.exports = merge(common, {
     output: {
         filename: 'js/[name].[chunkhash:8].js',
         chunkFilename: 'js/[name].[chunkhash:8].chunk.js',
-        publicPath: '/assets/',
+        publicPath: '/',
 
     },
     plugins: [
@@ -54,7 +54,7 @@ module.exports = merge(common, {
                         options: {
                             // you can specify a publicPath here
                             // by default it uses publicPath in webpackOptions.output
-                            publicPath: '/assets/',
+                            publicPath: '/',
                         },
                     },
                     'css-loader',
