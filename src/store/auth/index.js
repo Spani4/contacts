@@ -52,7 +52,6 @@ export default {
                 await dispatch('contacts/fetchContacts', null, { root: true });
             } catch(err) {
                 console.warn('Autologin failed');
-                router.replace('/auth');
             } finally {
                 dispatch('stopLoading', null, { root: true })
             }

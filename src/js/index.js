@@ -15,6 +15,7 @@ Vue.directive('focus', {
     }
 })
 
+store.dispatch('auth/autoLogin');
 
 const el = document.getElementById('app');
 
@@ -24,10 +25,5 @@ new Vue({
     el,
     store,
     router,
-
-    created() {
-        this.$store.dispatch('auth/autoLogin');
-    },
-
     render: h => h(App),
 })
