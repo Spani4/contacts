@@ -14,6 +14,8 @@ module.exports = merge(common, {
         port   : 3000,
         // host: "192.168.0.144",
         inline : true,
+        index: 'index.html',
+        historyApiFallback: true,
         overlay: {
             warnings: true,
             errors  : true
