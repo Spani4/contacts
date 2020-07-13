@@ -1,6 +1,7 @@
 # contacts
 
-git clone ...<br/>
+git clone https://github.com/Spani4/contacts.git<br/>
+npm install
 npm run dev
 
 or go to http://antoha.bazaintuit.ru/
